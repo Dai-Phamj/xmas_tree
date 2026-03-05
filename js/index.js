@@ -52,10 +52,10 @@ import * as THREE from 'three';
                 autoScanLocal: true,
                 scanCount: 200, 
                 images: [
-                    'https://images.unsplash.com/photo-1543589077-47d81606c1bf?q=80&w=600', 
-                    'https://images.unsplash.com/photo-1576919228236-a097c32a5cd4?q=80&w=600',
-                    'https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=600', 
-                    'https://images.unsplash.com/photo-1482638588057-dce9509db949?q=80&w=600'
+                    // 'https://images.unsplash.com/photo-1543589077-47d81606c1bf?q=80&w=600', 
+                    // 'https://images.unsplash.com/photo-1576919228236-a097c32a5cd4?q=80&w=600',
+                    // 'https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=600', 
+                    // 'https://images.unsplash.com/photo-1482638588057-dce9509db949?q=80&w=600'
                 ]
             }
         };
