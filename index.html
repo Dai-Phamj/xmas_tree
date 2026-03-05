@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Grand Luxury Tree - Christmas Edition</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+    </style>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+                "@mediapipe/tasks-vision": "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/+esm"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="loader">
+        <div class="spinner"></div>
+        <div class="loader-text">Loading Memories</div>
+    </div>
+
+    <div id="canvas-container"></div>
+
+    <div id="ui-layer">
+        <h1>Merry Christmas</h1>
+        
+        <div class="controls-wrapper">
+            <div class="btn-group">
+                <label class="upload-btn">
+                    Select Folder
+                    <input type="file" id="folder-input" webkitdirectory directory multiple>
+                </label>
+                
+                <label class="upload-btn">
+                    Select Files
+                    <input type="file" id="file-input" multiple accept="image/*">
+                </label>
+            </div>
+            <div class="hint-text">Use "Select Folder" to load all photos at once</div>
+            <div class="hint-text" style="opacity: 0.7; font-size: 8px;">Or put photos in "./images/" (1.jpg - 30.jpg)</div>
+        </div>
+    </div>
+
+    <div id="webcam-wrapper">
+        <video id="webcam" autoplay playsinline></video>
+        <div id="debug-info">Initializing...</div>
+        <canvas id="webcam-preview" style="display:none;"></canvas>
+    </div>
+
+    <script type="module" src="./js/index.js"></script>
+</body>
+</html>
