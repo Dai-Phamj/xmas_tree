@@ -53,8 +53,7 @@ import * as THREE from 'three';
                 scanCount: 200, 
                 images: [
                     'img/Bảo Châu.jpeg', 
-                    'img/Đ Trâm.jpeg', 
-                    'img/Dai.jpg', 
+                    'img/Đ Trâm.jpeg',
                     'img/Hân.JPG', 
                     'img/Lan Anh.jpg', 
                     'img/Loan.jpg', 
