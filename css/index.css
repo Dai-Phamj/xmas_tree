@@ -1,0 +1,278 @@
+/* 修改背景为深色渐变，不再是纯黑 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body { 
+    margin: 0; 
+    overflow: hidden; 
+    background: radial-gradient(circle at center, #0f2027 0%, #203a43 50%, #2c5364 100%); 
+    background-color: #050d1a; /* Fallback */
+    font-family: 'Times New Roman', serif; 
+    -webkit-tap-highlight-color: transparent;
+    touch-action: none;
+}
+#canvas-container { width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; z-index: 1; }
+
+/* UI Overlay */
+#ui-layer {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 10; pointer-events: none;
+    display: flex; flex-direction: column; 
+    align-items: center;
+    padding-top: clamp(15px, 4vh, 40px);
+    box-sizing: border-box;
+    transition: opacity 0.5s ease;
+}
+
+.ui-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Loading */
+#loader {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: #050d1a; z-index: 100;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: opacity 0.8s ease-out;
+}
+.loader-text {
+    color: #d4af37; font-size: clamp(10px, 2vw, 14px); letter-spacing: 4px; margin-top: 20px;
+    text-transform: uppercase; font-weight: 100;
+}
+.spinner {
+    width: 40px; height: 40px; border: 1px solid rgba(212, 175, 55, 0.2); 
+    border-top: 1px solid #d4af37; border-radius: 50%; 
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* Typography - Responsive */
+h1 { 
+    color: #fceea7; 
+    font-size: clamp(24px, 6vw, 56px); 
+    margin: 0; 
+    font-weight: 400; 
+    letter-spacing: clamp(2px, 1vw, 6px); 
+    text-shadow: 0 0 50px rgba(252, 238, 167, 0.6); 
+    background: linear-gradient(to bottom, #fff, #eebb66);
+    background-clip: text;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    font-family: 'Cinzel', 'Times New Roman', serif;
+    opacity: 0.9;
+    transition: opacity 0.5s ease;
+    text-align: center;
+    padding: 0 10px;
+}
+
+/* Controls - Responsive */
+.controls-wrapper {
+    position: absolute; 
+    top: clamp(15px, 3vh, 30px);
+    right: clamp(10px, 3vw, 30px);
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    z-index: 20;
+    transition: opacity 0.5s ease;
+    max-width: 90vw;
+}
+
+.btn-group {
+    display: flex;
+    gap: clamp(5px, 1.5vw, 10px);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.upload-btn {
+    background: rgba(20, 20, 20, 0.6); 
+    border: 1px solid rgba(212, 175, 55, 0.4); 
+    color: #d4af37; 
+    padding: clamp(8px, 1.5vw, 10px) clamp(12px, 2vw, 20px); 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    letter-spacing: clamp(1px, 0.3vw, 2px); 
+    font-size: clamp(9px, 1.5vw, 10px);
+    transition: all 0.4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    min-width: clamp(90px, 15vw, 120px);
+    min-height: 44px; /* Touch-friendly minimum */
+    white-space: nowrap;
+}
+.upload-btn:hover, .upload-btn:active { 
+    background: #d4af37; 
+    color: #000; 
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+.hint-text {
+    color: rgba(212, 175, 55, 0.5);
+    font-size: clamp(7px, 1.2vw, 9px);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: right;
+    margin-top: 3px;
+}
+
+input[type="file"] { display: none; }
+
+/* Webcam feedback - Responsive */
+/* #webcam-wrapper {
+    position: absolute; 
+    bottom: clamp(10px, 3vh, 30px);
+    left: clamp(10px, 3vw, 30px);
+    width: clamp(140px, 25vw, 280px);
+    height: clamp(105px, 18.75vw, 210px);
+    border: 1px solid rgba(212, 175, 55, 0.5); 
+    box-shadow: 0 0 20px rgba(0,0,0,0.9);
+    border-radius: 4px;
+    overflow: hidden; 
+    opacity: 1;
+    pointer-events: none;
+    z-index: 50;
+    background: #000;
+    transition: opacity 0.5s ease; 
+}
+
+#webcam {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1); 
+} */
+
+/* Debug info for gestures */
+#debug-info {
+    position: absolute;
+    bottom: 3px;
+    left: 3px;
+    color: rgba(212, 175, 55, 0.8);
+    font-size: clamp(7px, 1vw, 10px);
+    font-family: monospace;
+    background: rgba(0,0,0,0.5);
+    padding: 2px 5px;
+    pointer-events: none;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ============ RESPONSIVE MEDIA QUERIES ============ */
+
+/* Small phones (portrait) */
+@media screen and (max-width: 480px) {
+    .controls-wrapper {
+        top: auto;
+        bottom: clamp(10px, 2vh, 20px);
+        right: 50%;
+        transform: translateX(50%);
+        align-items: center;
+        width: calc(100% - 20px);
+        max-width: 320px;
+    }
+
+    .btn-group {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .upload-btn {
+        flex: 1;
+        min-width: 0;
+        padding: 10px 14px;
+    }
+
+    .hint-text {
+        text-align: center;
+    }
+
+    #webcam-wrapper {
+        width: 100px;
+        height: 75px;
+        bottom: auto;
+        top: clamp(60px, 12vh, 90px);
+        left: 10px;
+        opacity: 0.7;
+    }
+
+    h1 {
+        font-size: clamp(20px, 7vw, 32px);
+    }
+}
+
+/* Phones landscape */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    h1 {
+        font-size: clamp(18px, 4vh, 28px);
+        padding-top: 0;
+    }
+
+    #ui-layer {
+        padding-top: 8px;
+    }
+
+    .controls-wrapper {
+        top: 10px;
+        right: 10px;
+    }
+
+    #webcam-wrapper {
+        width: 120px;
+        height: 90px;
+        bottom: 10px;
+        left: 10px;
+    }
+
+    .upload-btn {
+        min-height: 36px;
+        padding: 6px 12px;
+    }
+}
+
+/* Tablets */
+@media screen and (min-width: 481px) and (max-width: 1024px) {
+    .controls-wrapper {
+        top: clamp(15px, 2.5vh, 25px);
+        right: clamp(15px, 2.5vw, 25px);
+    }
+
+    #webcam-wrapper {
+        width: clamp(160px, 22vw, 240px);
+        height: clamp(120px, 16.5vw, 180px);
+    }
+}
+
+/* Very large screens */
+@media screen and (min-width: 1921px) {
+    h1 {
+        font-size: 64px;
+    }
+
+    .upload-btn {
+        font-size: 12px;
+        padding: 12px 24px;
+        min-width: 140px;
+    }
+
+    #webcam-wrapper {
+        width: 320px;
+        height: 240px;
+    }
+}
+
+/* Prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .spinner {
+        animation-duration: 3s;
+    }
+}
