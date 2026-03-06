@@ -52,6 +52,34 @@ import * as THREE from 'three';
                 autoScanLocal: true,
                 scanCount: 200, 
                 images: [
+                    'img/Bảo Châu.jpeg', 
+                    'img/Đ Trâm.jpeg', 
+                    'img/Dai.jpg', 
+                    'img/Hân.JPG', 
+                    'img/Lan Anh.jpg', 
+                    'img/Loan.jpg', 
+                    'img/M Anh.jpeg', 
+                    'img/Mai.jpg', 
+                    'img/Mẫn.jpg', 
+                    'img/Mỹ Dung.jpeg', 
+                    'img/N Anh.jpeg', 
+                    'img/N Quỳnh.jpg', 
+                    'img/N Trâm.jpeg', 
+                    'img/Nhi B.jpeg', 
+                    'img/Ninh Như.jpeg', 
+                    'img/T Nhi.jpg', 
+                    'img/T Như.jpg', 
+                    'img/Thảo.jpg', 
+                    'img/Thư B.jpg', 
+                    'img/Thư Đ.jpg', 
+                    'img/Thuỷ.jpg', 
+                    'img/Thy.jpg', 
+                    'img/Tống Nhi.jpg', 
+                    'img/Trang.jpg', 
+                    'img/Trương Quỳnh.jpeg', 
+                    'img/Uyên Nhi.jpg', 
+                    'img/Uyên.jpg', 
+                    'img/Yến.jpeg'
                 ]
             }
         };
@@ -183,7 +211,7 @@ import * as THREE from 'three';
             const renderScene = new RenderPass(scene, camera);
             
             // Adjust bloom based on device performance
-            const bloomStrength = device.profile === 'low' ? 0.3 : 0.5;
+            const bloomStrength = device.profile === 'low' ? 0.1 : 0.1;
             const bloomRadius = device.profile === 'low' ? 0.2 : 0.4;
             
             bloomPass = new UnrealBloomPass(
