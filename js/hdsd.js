@@ -237,6 +237,6 @@
                 document.body.style.opacity = '1';
                 btn.textContent = 'Chuyển qua trang web chính →';
                 btn.style.opacity = '1';
-                window.location.href = '../html/xmastree.html';
+                window.location.href = '../html/index.html';
             }, 800);
         }
