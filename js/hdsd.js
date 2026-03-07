@@ -233,7 +233,7 @@
 
             setTimeout(() => {
                 // Replace with your actual main page URL
-                alert('Chuyển đến trang web chính! (Thay đổi URL trong code)');
+                alert('Chuyển đến trang web chính!');
                 document.body.style.opacity = '1';
                 btn.textContent = 'Chuyển qua trang web chính →';
                 btn.style.opacity = '1';
