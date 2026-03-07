@@ -1,57 +1,139 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Woman's Day</title>
-    <link rel="stylesheet" href="./css/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Sử Dụng</title>
+    <link rel="stylesheet" href="./css/hdsd.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
     </style>
-    <script type="importmap">
-        {
-            "imports": {
-                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
-                "@mediapipe/tasks-vision": "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/+esm"
-            }
-        }
-    </script>
 </head>
 <body>
-    <div id="loader">
-        <div class="spinner"></div>
-        <div class="loader-text">Loading Memories</div>
-    </div>
+    <div class="particles" id="particles"></div>
 
-    <div id="canvas-container"></div>
-
-    <div id="ui-layer">
-        <h1>Happy Woman's Day</h1>
-        
-        <div class="controls-wrapper">
-            <div class="btn-group">
-                <label class="upload-btn">
-                    Select Folder
-                    <input type="file" id="folder-input" webkitdirectory directory multiple>
-                </label>
-                
-                <label class="upload-btn">
-                    Select Files
-                    <input type="file" id="file-input" multiple accept="image/*">
-                </label>
-            </div>
-            <div class="hint-text">Use "Select Folder" to load all photos at once</div>
-            <div class="hint-text" style="opacity: 0.7; font-size: 8px;">Or put photos in "./images/" (1.jpg - 30.jpg)</div>
+    <div class="section active" id="section-welcome">
+        <div class="mb-6">
+            <span class="text-6xl">✨</span>
+        </div>
+        <h1 class="text-3xl md:text-4xl font-bold text-white text-center leading-relaxed max-w-2xl mb-2" id="welcome-text"></h1>
+        <span class="cursor-blink" id="welcome-cursor"></span>
+        <div class="progress-bar-container mt-8" id="welcome-progress-container" style="opacity:0">
+            <div class="progress-bar" id="welcome-progress"></div>
         </div>
     </div>
 
-    <div id="webcam-wrapper">
-        <video id="webcam" autoplay playsinline></video>
-        <div id="debug-info">Initializing...</div>
-        <canvas id="webcam-preview" style="display:none;"></canvas>
+    <div class="section" id="section-step1">
+        <div class="step-indicator">
+            <div class="step-dot active" id="dot1-s1"></div>
+            <div class="step-dot" id="dot2-s1"></div>
+            <div class="step-dot" id="dot3-s1"></div>
+        </div>
+        <p class="text-violet-300 text-sm font-semibold tracking-widest uppercase mb-4">Bước 1</p>
+        <div class="hand-transition-row">
+            <div class="hand-container">
+                <div class="glow-ring"></div>
+                <span class="hand-emoji visible" id="s1-fist">✊</span>
+                <span class="hand-emoji hidden" id="s1-open">🖐️</span>
+            </div>
+        </div>
+        <p class="text-white/80 text-lg text-center max-w-md leading-relaxed" id="s1-text" style="opacity:0; transform:translateY(10px); transition: all 0.5s ease;">
+            Mở rộng bàn tay để tương tác với cây thông.
+        </p>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="s1-progress"></div>
+        </div>
     </div>
 
-    <script type="module" src="./js/index.js"></script>
+    <div class="section" id="section-step2">
+        <div class="step-indicator">
+            <div class="step-dot completed"></div>
+            <div class="step-dot active"></div>
+            <div class="step-dot"></div>
+        </div>
+        <p class="text-violet-300 text-sm font-semibold tracking-widest uppercase mb-4">Bước 2</p>
+        <div class="hand-transition-row">
+            <div class="hand-container">
+                <div class="glow-ring"></div>
+                <span class="hand-emoji visible" id="s2-open">🖐️</span>
+                <span class="hand-emoji hidden" id="s2-ok">👌</span>
+            </div>
+        </div>
+        <p class="text-white/80 text-lg text-center max-w-md leading-relaxed" id="s2-text" style="opacity:0; transform:translateY(10px); transition: all 0.5s ease;">
+            Chụm 2 ngón tay trỏ và cái lại với nhau để phóng to một tấm hình bất kì.
+        </p>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="s2-progress"></div>
+        </div>
+    </div>
+
+    <div class="section" id="section-step3">
+        <div class="step-indicator">
+            <div class="step-dot completed"></div>
+            <div class="step-dot completed"></div>
+            <div class="step-dot active"></div>
+        </div>
+        <p class="text-violet-300 text-sm font-semibold tracking-widest uppercase mb-4">Bước 3</p>
+
+        <div class="dual-container" id="s3-dual">
+            <div class="dual-option" id="s3-caseA">
+                <div class="hand-transition-row" style="margin-bottom:0;">
+                    <div class="hand-anim-container">
+                        <span class="hand-emoji visible" id="s3a-ok">👌</span>
+                        <span class="hand-emoji hidden" id="s3a-open">🖐️</span>
+                    </div>
+                </div>
+                <div class="label">Thu lại hình ảnh</div>
+            </div>
+
+            <div class="or-divider" id="s3-or">hoặc</div>
+
+            <div class="dual-option" id="s3-caseB">
+                <div class="hand-transition-row" style="margin-bottom:0;">
+                    <div class="hand-anim-container">
+                        <span class="hand-emoji visible" id="s3b-ok">👌</span>
+                        <span class="hand-emoji hidden" id="s3b-fist">✊</span>
+                    </div>
+                </div>
+                <div class="label">Trở lại ban đầu</div>
+            </div>
+        </div>
+
+        <p class="text-white/80 text-lg text-center max-w-lg leading-relaxed mt-6" id="s3-text" style="opacity:0; transform:translateY(10px); transition: all 0.5s ease;">
+            Mở rộng lại bàn tay để thu lại hình ảnh hoặc nắm bàn tay lại để cây thông trở lại trạng thái ban đầu.
+        </p>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="s3-progress"></div>
+        </div>
+    </div>
+
+    <!-- SECTION: Ending -->
+    <div class="section" id="section-ending">
+        <div class="mb-4">
+            <span class="text-5xl" id="ending-emoji">🎉</span>
+        </div>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-white text-center mb-6 leading-tight" style="background: linear-gradient(135deg, #feca57, #ff6b6b, #48dbfb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="ending-title">
+            Đã kết thúc phần hướng dẫn sử dụng
+        </h1>
+        <p class="text-xl md:text-2xl text-violet-200 font-medium text-center mb-10" id="ending-subtitle">
+            🌸 Và chúc bạn có một ngày 8/3 thật vui vẻ 🌸
+        </p>
+        <button class="main-btn" id="main-btn" onclick="goToMainPage()">
+            Chuyển qua trang web chính →
+        </button>
+=
+        <span class="flower" style="top:15%; left:10%; animation-delay:0s;">🌸</span>
+        <span class="flower" style="top:20%; right:12%; animation-delay:0.5s;">🌺</span>
+        <span class="flower" style="bottom:20%; left:8%; animation-delay:1s;">🌷</span>
+        <span class="flower" style="bottom:15%; right:10%; animation-delay:1.5s;">💐</span>
+        <span class="flower" style="top:40%; left:5%; animation-delay:0.8s; font-size:20px;">✿</span>
+        <span class="flower" style="top:35%; right:6%; animation-delay:1.2s; font-size:22px;">🌼</span>
+    </div>
+
+    <!-- Confetti container -->
+    <div class="confetti-container" id="confetti-container"></div>
+
+    <script src="./js/hdsd.js"></script>
 </body>
 </html>
